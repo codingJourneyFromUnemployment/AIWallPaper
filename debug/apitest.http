@@ -1,0 +1,14 @@
+@baseUrl = http://127.0.0.1:3000/api
+
+### hello-world
+
+GET {{baseUrl}}/hello-world
+
+### test
+
+POST {{baseUrl}}/test
+Content-Type: application/json
+
+{
+    "name": "John Doe"
+}
