@@ -19,6 +19,10 @@ POST {{baseUrl}}/generate-image
 Content-Type: application/json
 
 {
-    "prompt": "a cute cat",
+    "prompt": "a cat, super cute",
     "userId": "123"
 }
+
+### get-wallpapera
+
+GET {{baseUrl}}/get-wallpapers
