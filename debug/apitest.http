@@ -19,6 +19,6 @@ POST {{baseUrl}}/generate-image
 Content-Type: application/json
 
 {
-    "prompt": "Ethereal forest elf, slender figure, luminous pale skin, long flowing silver hair with intricate braids, piercing emerald eyes, delicately pointed ears, wearing an elaborate gown made of living leaves and flowers, barefoot, standing in a mystical ancient forest, massive gnarled trees, dappled sunlight filtering through dense canopy, bioluminescent plants and mushrooms glowing softly, fireflies dancing in the air, crystal clear stream nearby, moss-covered stones, vibrant wildflowers, subtle magical aura surrounding the elf, woodland creatures watching curiously from the shadows, mist swirling around feet, holding a glowing magical staff, vine tattoos on arms, crown of twigs and berries, photorealistic details, fantasy art style, soft ethereal lighting, shallow depth of field, 8K resolution",
+    "prompt": "a cute cat",
     "userId": "123"
 }
