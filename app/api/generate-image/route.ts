@@ -1,5 +1,6 @@
 import * as fal from "@fal-ai/serverless-client";
 import { NextResponse } from "next/server";
+import { enhancePrompt } from "../../../utils/create-prompt";
 
 interface Result {
   images: {
@@ -21,9 +22,11 @@ export async function POST(req: Request) {
       );
     }
 
-    const result : Result = await fal.subscribe("fal-ai/flux/schnell", {
+    const enhancedPrompt = await enhancePrompt(prompt);
+
+    const result: Result = await fal.subscribe("fal-ai/flux/schnell", {
       input: {
-        prompt: prompt,
+        prompt: enhancedPrompt,
       },
       logs: true,
       onQueueUpdate: (update) => {
@@ -37,6 +40,7 @@ export async function POST(req: Request) {
     return NextResponse.json({
       url,
       prompt: result.prompt,
+      enhancePrompt,
       statuscode: 200,
     })
 
