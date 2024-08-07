@@ -19,7 +19,7 @@ POST {{baseUrl}}/generate-image
 Content-Type: application/json
 
 {
-    "prompt": "a cat, super cute",
+    "prompt": "",
     "userId": "123"
 }
 
