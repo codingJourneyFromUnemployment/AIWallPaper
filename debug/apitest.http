@@ -19,7 +19,7 @@ POST {{baseUrl}}/generate-image
 Content-Type: application/json
 
 {
-    "prompt": "",
+    "prompt": "樱花树下的奥特曼",
     "userId": "123"
 }
 

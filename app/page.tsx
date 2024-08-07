@@ -3,14 +3,18 @@ import Header from  "../components/header";
 import Input from "../components/input";
 import Wallpapers from "../components/wallpapers";
 import Footer from "../components/footer";
+import Hero from "../components/hero";
 
 export default function Home() {
   return (
     <>
-      <Header />
-      <Input />
-      <Wallpapers />
-      <Footer />
+      <div className="flex flex-col items-center ">
+        <Header />
+        <Hero />
+        <Input />
+        <Wallpapers />
+        <Footer />
+      </div>
     </>
   );
 }

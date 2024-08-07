@@ -27,7 +27,7 @@ export async function POST(req: Request) {
     const result: Result = await fal.subscribe("fal-ai/flux/schnell", {
       input: {
         prompt: enhancedPrompt,
-        num_inference_steps: 12,
+        num_inference_steps: 10,
         enable_safety_checker: false,
       },
       logs: true,
