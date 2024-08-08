@@ -19,7 +19,7 @@ POST {{baseUrl}}/generate-image
 Content-Type: application/json
 
 {
-    "prompt": "a logo for a website, the website is about AI wallpaper",
+    "prompt": "a real thai beauty",
     "userId": "123"
 }
 

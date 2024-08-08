@@ -7,14 +7,12 @@ import Hero from "../components/hero";
 
 export default function Home() {
   return (
-    <>
-      <div className="flex flex-col items-center ">
-        <Header />
-        <Hero />
-        <Input />
-        <Wallpapers />
-        <Footer />
-      </div>
-    </>
+    <div className="flex flex-col items-center min-h-screen ">
+      <Header />
+      <Hero />
+      <Input />
+      <Wallpapers />
+      <Footer />
+    </div>
   );
 }
