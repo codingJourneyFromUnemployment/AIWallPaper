@@ -27,7 +27,7 @@ export default function Wallpapers() {
   }, []);
 
   if (isLoading) {
-    return <div className="text-center py-10">Loading wallpapers...</div>;
+    return <div className="text-center py-10 text-primary/60">Loading wallpapers...</div>;
   }
 
   return (

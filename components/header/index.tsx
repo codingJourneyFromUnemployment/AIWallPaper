@@ -4,6 +4,39 @@ import { useState } from "react";
 import { Dialog, DialogPanel } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
+const Logo = ({ className = "h-10 w-auto xl:h-12" }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 100 100"
+    className={className}
+  >
+    <rect x="0" y="0" width="100" height="100" fill="white" />
+    <path
+      d="M20 80 Q50 20 80 80"
+      fill="none"
+      stroke="#7C3AED"
+      strokeWidth="8"
+      strokeLinecap="round"
+    />
+    <circle
+      cx="50"
+      cy="50"
+      r="25"
+      fill="none"
+      stroke="#7C3AED"
+      strokeWidth="6"
+    />
+    <circle cx="50" cy="50" r="5" fill="#7C3AED" />
+    <path
+      d="M35 70 L50 40 L65 70"
+      fill="none"
+      stroke="#7C3AED"
+      strokeWidth="6"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -15,12 +48,8 @@ export default function Header() {
       >
         <div className="flex lg:flex-1">
           <a href="#" className="-m-1.5 p-1.5">
-            <span className="sr-only">Your Company</span>
-            <img
-              alt=""
-              src="https://tailwindui.starxg.com/img/logos/mark.svg?color=indigo&shade=600"
-              className="h-8 w-auto xl:h-10"
-            />
+            <span className="sr-only">AI Wallpaper</span>
+            <Logo className="h-10 w-auto xl:h-12" />
           </a>
         </div>
         <div className="flex lg:hidden">
@@ -52,11 +81,7 @@ export default function Header() {
           <div className="flex items-center justify-between">
             <a href="#" className="-m-1.5 p-1.5">
               <span className="sr-only">Your Company</span>
-              <img
-                alt=""
-                src="https://tailwindui.starxg.com/img/logos/mark.svg?color=indigo&shade=600"
-                className="h-8 w-auto"
-              />
+              <Logo className="h-10 w-auto" />
             </a>
             <button
               type="button"

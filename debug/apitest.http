@@ -19,7 +19,7 @@ POST {{baseUrl}}/generate-image
 Content-Type: application/json
 
 {
-    "prompt": "a real thai beauty",
+    "prompt": "a real big dinosaur",
     "userId": "123"
 }
 

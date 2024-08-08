@@ -1,7 +1,7 @@
 export default function Hero() {
   return (
     <div className="bg-white">
-      <div className="mx-auto px-6 mt-8 md:pt-24 md:pb-8 lg:px-8">
+      <div className="mx-auto px-6 mt-8 md:pt-16 md:pb-8 lg:px-8">
         <h1 className="text-primary text-3xl font-bold tracking-tight text-gray-900 md:text-6xl lg:text-8xl">
           AI powered wallpaper generator
         </h1>
