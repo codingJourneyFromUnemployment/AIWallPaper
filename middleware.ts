@@ -1,6 +1,19 @@
-import { clerkMiddleware } from "@clerk/nextjs/server";
+import {
+  clerkMiddleware,
+  createRouteMatcher,
+} from "@clerk/nextjs/server";
+import { handleUserAuth } from "./utils/userAuth";
+import { NextResponse } from "next/server";
 
-export default clerkMiddleware();
+const protectedRoutes = createRouteMatcher(["/api/generate-image"]);
+
+export default clerkMiddleware((auth, req) => {
+  if (protectedRoutes(req)) {
+    auth().protect();
+  }
+  
+  return NextResponse.next();
+});
 
 export const config = {
   matcher: [

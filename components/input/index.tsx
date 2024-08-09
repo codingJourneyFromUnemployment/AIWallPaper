@@ -3,14 +3,16 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Image from "next/image";
+import { useUser } from "@clerk/nextjs";
 
 export default function Input() {
   const [userPrompt, setUserPrompt] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const { isSignedIn, user } = useUser();
 
   async function handleSubmit(event) {
     event.preventDefault();
-    if (!userPrompt || isLoading) {
+    if (!userPrompt || isLoading || !isSignedIn) {
       return;
     }
 
@@ -18,7 +20,7 @@ export default function Input() {
 
     try {
       const response = await axios.post("/api/generate-image", {
-        userId: "123",
+        userId: user.id,
         prompt: userPrompt,
       });
       console.log(response.data.url);
@@ -36,6 +38,10 @@ export default function Input() {
       handleSubmit(event);
     }
   };
+
+  if (!isSignedIn) {
+    return null;
+  }
 
   return (
     <div className="w-11/12 md:w-3/4 md:max-w-7xl flex flex-col items-center space-y-6 md:flex-row md:space-x-6">

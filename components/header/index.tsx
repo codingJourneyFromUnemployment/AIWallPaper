@@ -3,6 +3,9 @@
 import { useState } from "react";
 import { Dialog, DialogPanel } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { useAuth, useSignIn } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const Logo = ({ className = "h-10 w-auto xl:h-12" }) => (
   <svg
@@ -39,6 +42,11 @@ const Logo = ({ className = "h-10 w-auto xl:h-12" }) => (
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { isSignedIn, signOut } = useAuth();
+  const { signIn } = useSignIn();
+  const router = useRouter();
+
+
 
   return (
     <header className="bg-white w-full flex-shrink-0">
@@ -63,12 +71,12 @@ export default function Header() {
           </button>
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a
-            href="#"
+          <Link
+            href="/sign-in"
             className="text-sm font-semibold leading-6 text-gray-900 xl:text-base hover:text-primary"
           >
             Log in <span aria-hidden="true">&rarr;</span>
-          </a>
+          </Link>
         </div>
       </nav>
       <Dialog
@@ -95,12 +103,12 @@ export default function Header() {
           <div className="mt-6 flow-root">
             <div className="-my-6 divide-y divide-gray-500/10">
               <div className="py-6">
-                <a
-                  href="#"
+                <Link
+                  href="/sign-in"
                   className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
                   Log in
-                </a>
+                </Link>
               </div>
             </div>
           </div>
