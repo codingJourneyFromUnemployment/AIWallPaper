@@ -1,23 +1,23 @@
 import mongoose from "mongoose";
-import colors from "colors";
 
 let isConnected = false;
 
 export const connectToAtlas = async () => {
   if(isConnected) {
-    console.log("Already connected to MongoDB".green);
+    console.log("Already connected to MongoDB");
     return;
   }
 
   if (!process.env.MONGODB_URI) {
-    console.error("MongoDB URI is missing".red);
+    console.error("MongoDB URI is missing");
     return;
   }
 
   try {
     await mongoose.connect(process.env.MONGODB_URI)
     isConnected = true;
+    console.log("Connected to MongoDB");
   } catch (error:any) {
-    console.error(`Error connecting to MongoDB: ${error.message}`.red);
+    console.error(`Error connecting to MongoDB: ${error.message}`);
   }
 }

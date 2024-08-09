@@ -16,7 +16,9 @@ interface Result {
 export async function POST(req: Request) {
   try {
     const { userId, prompt } = await req.json();
+    console.log("starting to connect to atlas");
     await connectToAtlas();
+    console.log("connected to atlas");
 
     if (!userId || !prompt) {
       return NextResponse.json(
@@ -26,11 +28,12 @@ export async function POST(req: Request) {
     }
 
     const enhancedPrompt = await enhancePrompt(prompt);
+    console.log("enhanced prompt", enhancedPrompt);
 
     const result: Result = await fal.subscribe("fal-ai/flux/schnell", {
       input: {
         prompt: enhancedPrompt,
-        num_inference_steps: 10,
+        num_inference_steps: 12,
         enable_safety_checker: false,
       },
       logs: true,
@@ -40,6 +43,16 @@ export async function POST(req: Request) {
         }
       },
     });
+
+    console.log("generate success");
+
+    if (!result.images || result.images.length === 0) {
+      console.error("No images generated");
+      return NextResponse.json(
+        { error: "No images generated" },
+        { status: 500 }
+      );
+    }
 
     const url = result.images[0].url;
     const newWallpaper = new WallpaperModel({

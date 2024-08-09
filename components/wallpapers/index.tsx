@@ -12,7 +12,12 @@ export default function Wallpapers() {
     try {
       const res = await axios.get("/api/get-wallpapers");
       const wallpapers = res.data.data;
-      setWallpapers(wallpapers);
+
+      const sortedWallpapers = wallpapers.sort((a, b) => 
+        new Date(b.img_created_at).getTime() - new Date(a.img_created_at).getTime()
+      );
+
+      setWallpapers(sortedWallpapers);
       return wallpapers;
     } catch (error) {
       console.error(error);
@@ -22,8 +27,19 @@ export default function Wallpapers() {
     }
   }
 
+  function handleImageClick (wallpaper: Wallpaper) {
+    window.open(wallpaper.img_url, "_blank");
+  }
+
   useEffect(() => {
     fetchWallpapers();
+
+    const intervalID = setInterval(fetchWallpapers, 10000);
+
+    return () => {
+      clearInterval(intervalID);
+    };
+
   }, []);
 
   if (isLoading) {
@@ -41,7 +57,7 @@ export default function Wallpapers() {
       >
         {wallpapers?.map((wallpaper, index) => (
           <li
-            key={`${wallpaper.img_id || index}-${wallpaper.img_url}`}
+            key={`${wallpaper._id}-${index}`}
             className="relative"
           >
             <div className="group aspect-h-7 aspect-w-10 block w-full overflow-hidden rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 focus-within:ring-offset-gray-100">
@@ -53,6 +69,7 @@ export default function Wallpapers() {
               <button
                 type="button"
                 className="absolute inset-0 focus:outline-none"
+                onClick={() => handleImageClick(wallpaper)}
               >
                 <span className="sr-only">
                   View details for {wallpaper.img_description}

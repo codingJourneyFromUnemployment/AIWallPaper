@@ -10,7 +10,8 @@ POST {{baseUrl}}/test
 Content-Type: application/json
 
 {
-    "name": "John Doe"
+    "prompt": "a real big dinosaur",
+    "userId": "123"
 }
 
 ### generate-image

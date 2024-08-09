@@ -1,34 +1,15 @@
 import { NextResponse } from "next/server";
 import { Wallpaper } from "@/type/wallpaper";
+import { connectToAtlas } from "@/utils/database";
+import WallpaperModel from "@/models/wallpaper";
 
 export async function GET(req: Request) {
   try {
-    const wallpapers: Wallpaper[] = [
-      {
-        img_description: "A beautiful wallpaper 1",
-        img_url: "https://loremflickr.com/320/240",
-      },
-      {
-        img_description: "A beautiful wallpaper 2",
-        img_url: "https://loremflickr.com/320/240",
-      },
-      {
-        img_description: "A beautiful wallpaper 3",
-        img_url: "https://loremflickr.com/320/240",
-      },
-      {
-        img_description: "A beautiful wallpaper 4",
-        img_url: "https://loremflickr.com/320/240",
-      },
-      {
-        img_description: "A beautiful wallpaper 5",
-        img_url: "https://loremflickr.com/320/240",
-      },
-      {
-        img_description: "A beautiful wallpaper 6",
-        img_url: "https://loremflickr.com/320/240",
-      },
-    ];
+    await connectToAtlas();
+  
+    const wallpapers : Wallpaper[] = await WallpaperModel.find();
+
+    
     return NextResponse.json({
       message: "ok",
       statuscode: 200,

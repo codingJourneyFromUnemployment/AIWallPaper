@@ -22,7 +22,9 @@ const wallpaperSchema = new mongoose.Schema({
   },
 });
 
-const WallpaperModel = mongoose.model<Wallpaper>("Wallpaper", wallpaperSchema);
+const WallpaperModel =
+  mongoose.models.Wallpaper ||
+  mongoose.model<Wallpaper>("Wallpaper", wallpaperSchema);
 
 export default WallpaperModel;
 

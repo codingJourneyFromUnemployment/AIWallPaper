@@ -10,8 +10,7 @@ export default function Input() {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    if (!userPrompt) {
-      console.log("Please enter a prompt");
+    if (!userPrompt || isLoading) {
       return;
     }
 
@@ -23,6 +22,7 @@ export default function Input() {
         prompt: userPrompt,
       });
       console.log(response.data.url);
+      window.open(response.data.url, "_blank");
 
     } catch (error) {
       console.error(error);
@@ -30,6 +30,12 @@ export default function Input() {
       setIsLoading(false);
     }
   }
+
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter" && !isLoading) {
+      handleSubmit(event);
+    }
+  };
 
   return (
     <div className="w-11/12 md:w-3/4 md:max-w-7xl flex flex-col items-center space-y-6 md:flex-row md:space-x-6">
@@ -41,8 +47,12 @@ export default function Input() {
         name="prompt"
         type="text"
         placeholder="Input your prompt for a new wallpaper"
-        className="w-full rounded-md border-solid border border-primary/40 bg-background py-1.5 text-foreground shadow-md placeholder:text-muted-foreground focus:outline-none focus:border-primary sm:text-sm sm:leading-6 pl-4"
+        className={`w-full rounded-md border-solid border border-primary/40 bg-background py-1.5 text-foreground shadow-md placeholder:text-muted-foreground focus:outline-none focus:border-primary sm:text-sm sm:leading-6 pl-4 ${
+          isLoading ? "bg-gray-100 text-gray-400" : ""
+        }`}
         onChange={(event) => setUserPrompt(event.target.value)}
+        onKeyPress={handleKeyPress}
+        disabled={isLoading}
       />
       <button
         type="button"
