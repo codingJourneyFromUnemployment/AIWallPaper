@@ -5,5 +5,5 @@ export interface User {
   clerkId: string;
   username: string;
   createdAt: Date;
-  generatedWallpapers?: Types.ObjectId[];
+  generatedWallpapers?: mongoose.Schema.Types.ObjectId[];
 }

@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import { enhancePrompt } from "../../../utils/create-prompt";
 import { connectToAtlas } from "@/utils/database";
 import WallpaperModel from "@/models/wallpaper";
-import { auth } from "@clerk/nextjs/server";
+import UserModel from "@/models/user";
 
 interface Result {
   images: {
@@ -16,26 +16,20 @@ interface Result {
 
 export async function POST(req: Request) {
   try {
-    const { userId } = auth();
-    
-    if (!userId) {
-      return NextResponse.json(
-        { error: "Unauthorized, Failed to create wallpaper" },
-        { status: 401 }
-      );
-    }
 
-    const { prompt } = await req.json();
+    const { prompt, userId } = await req.json();
     console.log("starting to connect to atlas");
     await connectToAtlas();
     console.log("connected to atlas");
 
-    if (!prompt) {
+    if (!prompt || !userId) {
       return NextResponse.json(
-        { error: "Missing prompt, Failed to create wallpaper" },
+        { error: "Missing prompt or userId, please provide both" },
         { status: 400 }
       );
     }
+
+    const user = await UserModel.findOne({ clerkId: userId });
 
     const enhancedPrompt = await enhancePrompt(prompt);
     console.log("enhanced prompt", enhancedPrompt);
@@ -68,7 +62,7 @@ export async function POST(req: Request) {
     const newWallpaper = new WallpaperModel({
       img_url: url,
       img_description: prompt,
-      img_creator: userId,
+      img_creator: user._id,
       img_created_at: new Date(),
     });
 

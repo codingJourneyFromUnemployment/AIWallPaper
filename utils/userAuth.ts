@@ -1,17 +1,27 @@
 import { connectToAtlas } from "./database";
 import UserModel from "@/models/user";
+import { auth, currentUser } from "@clerk/nextjs/server";
 
-export async function handleUserAuth(clerkUser: any) {
+export async function handleUserAuth() {
   try {
     await connectToAtlas();
+    const { userId } = auth();
+    const clerkUser = await currentUser();
 
-    const existingUser = await UserModel.findOne({ clerkId: clerkUser.id });
+    if (!userId || !clerkUser) {
+      throw new Error("You must log in first");
+    }
+
+    const existingUser = await UserModel.findOne({ clerkId: userId });
+
     if (existingUser) {
       return existingUser;
     } else {
       const newUser = new UserModel({
-        clerkId: clerkUser.id,
-        username: clerkUser.username,
+        clerkId: userId,
+        username:
+          clerkUser.username ||
+          `${clerkUser.firstName} ${clerkUser.lastName}`.trim(),
         createdAt: new Date(),
       });
 

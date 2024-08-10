@@ -5,13 +5,13 @@ import {
 import { handleUserAuth } from "./utils/userAuth";
 import { NextResponse } from "next/server";
 
-const protectedRoutes = createRouteMatcher(["/api/generate-image"]);
+const protectedRoutes = createRouteMatcher(["/api/generate-image", "/api/auth-callback"]);   
 
 export default clerkMiddleware((auth, req) => {
   if (protectedRoutes(req)) {
     auth().protect();
   }
-  
+
   return NextResponse.next();
 });
 
