@@ -13,7 +13,7 @@ export default function Wallpapers() {
       const res = await axios.get("/api/get-wallpapers");
       const wallpapers = res.data.data;
 
-      const sortedWallpapers = wallpapers.sort((a, b) => 
+      const sortedWallpapers = wallpapers.sort((a: any, b: any) => 
         new Date(b.img_created_at).getTime() - new Date(a.img_created_at).getTime()
       );
 
