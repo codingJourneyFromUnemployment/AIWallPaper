@@ -42,7 +42,7 @@ export async function POST(req: Request) {
       },
       logs: true,
       onQueueUpdate: (update) => {
-        if (update.status === "IN_PROGRESS") {
+        if (update.status === "IN_PROGRESS" && update.logs) {
           update.logs.map((log) => log.message).forEach(console.log);
         }
       },
