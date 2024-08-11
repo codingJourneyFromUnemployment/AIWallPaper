@@ -10,7 +10,7 @@ export default function Input() {
   const [isLoading, setIsLoading] = useState(false);
   const { isSignedIn, user } = useUser();
 
-  async function handleSubmit(event) {
+  async function handleSubmit(event: any) {
     event.preventDefault();
     if (!userPrompt || isLoading || !isSignedIn) {
       return;
@@ -25,7 +25,6 @@ export default function Input() {
       });
       console.log(response.data.url);
       window.open(response.data.url, "_blank");
-
     } catch (error) {
       console.error(error);
     } finally {
@@ -33,7 +32,7 @@ export default function Input() {
     }
   }
 
-  const handleKeyPress = (event) => {
+  const handleKeyPress = (event : any) => {
     if (event.key === "Enter" && !isLoading) {
       handleSubmit(event);
     }

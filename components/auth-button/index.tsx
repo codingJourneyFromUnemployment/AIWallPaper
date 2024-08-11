@@ -6,9 +6,9 @@ import Link from "next/link";
 export default function AuthButton() {
   const { isSignedIn, isLoaded, user } = useUser();
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const dropdownRef = useRef(null);
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
 
-  function handleClickOutside(event) {
+  function handleClickOutside(event : any) {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
       setDropdownOpen(false);
     }
