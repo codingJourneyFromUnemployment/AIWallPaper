@@ -1,15 +1,19 @@
-import { NextResponse } from "next/server";
 import { handleUserAuth } from "@/utils/userAuth";
-import { headers } from "next/headers";
 
 export async function GET() {
   try {
-    const host = headers().get("host");
-    const protocol = process.env.NODE_ENV === "production" ? "https" : "http";
-    const user = await handleUserAuth();
-    return NextResponse.redirect(`${protocol}://${host}/`);
+    await handleUserAuth();
+    // 使用相对 URL 重定向到首页
+    return new Response(null, {
+      status: 302,
+      headers: { Location: "/" },
+    });
   } catch (error) {
     console.error("Error in auth callback", error);
-    return NextResponse.redirect("/login");
+    // 使用相对 URL 重定向到登录页
+    return new Response(null, {
+      status: 302,
+      headers: { Location: "/login" },
+    });
   }
 }
