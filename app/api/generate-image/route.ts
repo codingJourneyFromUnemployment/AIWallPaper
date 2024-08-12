@@ -13,6 +13,8 @@ interface Result {
   prompt: string;
 }
 
+// export const runtime = "edge";
+
 
 export async function POST(req: Request) {
   try {
@@ -34,7 +36,7 @@ export async function POST(req: Request) {
     const enhancedPrompt = await enhancePrompt(prompt);
     console.log("enhanced prompt", enhancedPrompt);
 
-    const result: Result = await fal.subscribe("fal-ai/flux/schnell", {
+    const result: Result = await fal.subscribe("fal-ai/flux-realism", {
       input: {
         prompt: enhancedPrompt,
         num_inference_steps: 12,
